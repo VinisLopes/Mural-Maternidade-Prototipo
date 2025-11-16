@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mural do Bebê – Exibição na TV</title>
+<meta name="description" content="Tela de exibição do mural do bebê para uso em TVs nos quartos da maternidade.">
+
+<style>
+:root{
+  /* TEMA ATUALIZADO (Cores Claras, mas frame escuro para TV) */
+  --bg:#f0f9ff; /* Fundo azul bem claro */
+  --surface:#020617; /* Frame escuro mantido para contraste de TV */
+  --primary:#38bdf8;
+  --accent:#ec4899; /* Rosa */
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --shadow:0 30px 80px rgba(0,0,0,.35);
+  --radius:28px;
+}
+
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+html,body{
+  height:100%;
+}
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 0 0,rgba(59,130,246,.1),transparent 55%),
+    radial-gradient(circle at 100% 100%,rgba(236,72,153,.08),transparent 55%),
+    var(--bg);
+  color:var(--text); /* Texto claro, pois o frame é escuro */
+}
+
+/* LAYOUT GERAL – MODO TV */
+.tv-wrapper{
+  min-height:100vh;
+  padding:2.6rem 3.2rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.tv-frame{
+  width:100%;
+  max-width:1240px;
+  min-height:560px;
+  border-radius:var(--radius);
+  background:
+    radial-gradient(circle at 0 0,rgba(56,189,248,.22),transparent 60%),
+    radial-gradient(circle at 100% 100%,rgba(236,72,153,.18),transparent 55%),
+    #020617;
+  box-shadow:var(--shadow);
+  padding:2rem 2.4rem 2.2rem;
+  position:relative;
+  overflow:hidden;
+}
+
+/* TOPO */
+.tv-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:1.7rem;
+}
+.tv-title-block{
+  max-width:62%;
+}
+.tv-label{
+  font-size:.9rem;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:var(--muted);
+  margin-bottom:.45rem;
+}
+.tv-name{
+  font-size:1.9rem;
+  font-weight:700;
+}
+.tv-years{
+  font-size:1rem;
+  color:var(--muted);
+  margin-top:.25rem;
+}
+.tv-quote{
+  margin-top:.6rem;
+  font-size:1rem;
+  color:#e5e7eb;
+}
+.tv-badge{
+  font-size:.78rem;
+  padding:.4rem .9rem;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.6);
+  background:rgba(15,23,42,.85);
+}
+
+/* MAIN = MURAL + GRUPOS */
+.tv-main{
+  display:flex;
+  flex-direction:column;
+  gap:1.6rem;
+}
+
+/* CARROSSEL PRINCIPAL */
+.tv-carousel{
+  border-radius:24px;
+  border:1px solid rgba(148,163,184,.55);
+  background:rgba(15,23,42,.94);
+  padding:1.3rem 1.5rem 1.6rem;
+  backdrop-filter:blur(18px);
+  position:relative;
+  overflow:hidden;
+}
+.tv-carousel-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:.9rem;
+}
+.tv-carousel-type{
+  font-size:.92rem;
+  font-weight:500;
+}
+.tv-carousel-counter{
+  font-size:.82rem;
+  color:var(--muted);
+}
+
+/* ÁREA DE MÍDIA (ONDE FICA A FOTO/VIDEO + SETAS) */
+.tv-media-wrapper{
+  position:relative;
+  margin-bottom:1.2rem;
+}
+.tv-slide{
+  display:none;
+  animation:.45s ease-out fadeInUp;
+}
+.tv-slide.active{
+  display:block;
+}
+
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* SLIDE COM FOTO / VÍDEO */
+.tv-slide-media{
+  border-radius:20px;
+  background:#000000;
+  overflow:hidden;
+  min-height:260px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.tv-slide-photo img{
+  width:100%;
+  max-height:320px;
+  object-fit:contain;
+  background:#000;
+}
+.tv-video{
+  width:100%;
+  max-height:320px;
+  display:block;
+  background:#000;
+}
+
+.tv-slide-texto .tv-slide-media{
+  display:none;
+}
+.tv-slide-texto .tv-slide-body{
+  padding:2.4rem 3rem 1.8rem;
+}
+
+.tv-slide-body{
+  padding:1.1rem 1.4rem 0;
+}
+.tv-slide-text{
+  font-size:1.02rem;
+  line-height:1.5;
+  color:#e5e7eb;
+  margin-bottom:.9rem;
+  text-align:center;
+}
+.tv-slide-meta{
+  font-size:.85rem;
+  color:var(--muted);
+  text-align:center;
+}
+
+.tv-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.85);
+  background:rgba(15,23,42,.88);
+  color:#e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.15rem;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(15,23,42,.65);
+}
+.tv-arrow-left{left:16px;}
+.tv-arrow-right{right:16px;}
+.tv-arrow:disabled{
+  opacity:.4;
+  cursor:default;
+}
+
+.tv-controls{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:.8rem;
+  color:var(--muted);
+}
+.tv-dots{
+  display:flex;
+  gap:.3rem;
+  align-items:center;
+}
+.tv-dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(148,163,184,.5);
+  opacity:.5;
+  transition:all .2s ease;
+}
+.tv-dot.active{
+  width:16px;
+  opacity:1;
+  background:var(--primary);
+}
+
+/* GRUPOS DE ITENS (FOTOS / VÍDEOS / TEXTOS) */
+.tv-groups{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.1rem;
+}
+.tv-group-card{
+  border-radius:20px;
+  border:1px solid rgba(148,163,184,.45);
+  background:linear-gradient(145deg,rgba(15,23,42,.96),rgba(15,23,42,.9));
+  padding:1.05rem 1.15rem 1rem;
+  backdrop-filter:blur(16px);
+}
+.tv-group-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  margin-bottom:.2rem;
+}
+.tv-group-title{
+  font-size:.95rem;
+}
+.tv-group-count{
+  font-size:.75rem;
+  color:var(--muted);
+}
+.tv-group-sub{
+  font-size:.78rem;
+  color:var(--muted);
+  margin-bottom:.7rem;
+}
+
+/* LISTA DE ITENS DENTRO DOS GRUPOS */
+.tv-items{
+  display:flex;
+  flex-direction:column;
+  gap:.45rem;
+}
+.tv-item{
+  border-radius:14px;
+  padding:.55rem .75rem;
+  display:flex;
+  flex-direction:column;
+  gap:.16rem;
+  font-size:.8rem;
+  cursor:pointer;
+  border:1px solid rgba(59,130,246,.55);
+  background:rgba(15,23,42,.9);
+  color:#e5e7eb;
+  transition:border .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.tv-item-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.tv-item-title{
+  font-weight:500;
+  max-width:75%;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.tv-item-type{
+  font-size:.72rem;
+  opacity:.8;
+}
+.tv-item-desc{
+  font-size:.75rem;
+  color:var(--muted);
+}
+.tv-item-title,
+.tv-item-type,
+.tv-item-desc{
+  transition:color .18s ease, opacity .18s ease;
+}
+.tv-item:not(.active) .tv-item-title,
+.tv-item:not(.active) .tv-item-type,
+.tv-item:not(.active) .tv-item-desc{
+  opacity:.78;
+}
+.tv-item.active{
+  background:radial-gradient(circle at 0 0,rgba(56,189,248,.22),rgba(15,23,42,.96));
+  border-color:rgba(56,189,248,.75);
+  box-shadow:0 0 0 1px rgba(15,23,42,.4);
+}
+.tv-item.active .tv-item-title{
+  font-weight:600;
+  opacity:1;
+}
+.tv-item:hover{
+  border-color:rgba(129,140,248,.9);
+}
+
+/* RESPONSIVO BÁSICO */
+@media (max-width:1000px){
+  .tv-wrapper{
+    padding:1.6rem 1.8rem;
+  }
+  .tv-title-block{max-width:100%;}
+  .tv-groups{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ATUALIZAÇÃO DE RESPONSIVIDADE */
+@media (max-width: 600px) {
+  .tv-wrapper {
+    padding: 1rem;
+  }
+  .tv-frame {
+    padding: 1.5rem 1rem;
+  }
+  .tv-header {
+    flex-direction: column; 
+    gap: .75rem;
+  }
+  .tv-title-block {
+    max-width: 100%;
+  }
+  .tv-name { font-size: 1.5rem; }
+  .tv-quote { font-size: .9rem; }
+  .tv-badge { align-self: flex-start; }
+
+  .tv-item-title {
+    max-width: 100%;
+    white-space: normal; /* Permite quebra de linha */
+    font-size: .85rem;
+  }
+  .tv-item-desc {
+    font-size: .8rem;
+  }
+  .tv-slide-text {
+    font-size: .9rem;
+  }
+  .tv-slide-meta {
+    font-size: .8rem;
+  }
+  .tv-slide-texto .tv-slide-body {
+    padding: 1.5rem 1rem .5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="tv-wrapper">
+  <div class="tv-frame">
+    <header class="tv-header">
+      <div class="tv-title-block">
+        <div class="tv-label">Mural do bebê</div>
+        <div class="tv-name" id="tvNome">Bem-vinda, Maria Alice!</div>
+        <div class="tv-years" id="tvAnos">15/11/2025 • 3.210kg • “Nossa alegria chegou!”</div>
+        <div class="tv-quote" id="tvFrase">
+          “Este mural reúne as primeiras fotos e mensagens de carinho da família e amigos.”
+        </div>
+      </div>
+      <div>
+        <span class="tv-badge" id="tvSala">Quarto 101 • Família Silva</span>
+      </div>
+    </header>
+
+    <section class="tv-main">
+
+      <div class="tv-carousel">
+        <div class="tv-carousel-header">
+          <div class="tv-carousel-type" id="tvTipoAtual">Fotos da família</div>
+          <div class="tv-carousel-counter" id="tvContador">1 de 5</div>
+        </div>
+
+        <div class="tv-media-wrapper">
+          <div class="tv-slide active" data-index="0" data-type="foto">
+            <div class="tv-slide-media">
+              <div class="tv-slide-photo">
+                <img src="https://images.pexels.com/photos/1648386/pexels-photo-1648386.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Foto de bebê exemplo">
+              </div>
+            </div>
+            <div class="tv-slide-body">
+              <div class="tv-slide-text">
+                “A primeira foto no quarto com a mamãe. Seja bem-vinda, filha!”
+              </div>
+              <div class="tv-slide-meta">
+                Enviado por <strong>Mamãe Ana</strong> • 2025
+              </div>
+            </div>
+          </div>
+
+          <div class="tv-slide" data-index="1" data-type="foto">
+            <div class="tv-slide-media">
+              <div class="tv-slide-photo">
+                <img src="https://images.pexels.com/photos/3875092/pexels-photo-3875092.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Foto de bebê exemplo 2">
+              </div>
+            </div>
+            <div class="tv-slide-body">
+              <div class="tv-slide-text">
+                “Os pezinhos mais lindos do mundo. A vovó já ama muito!”
+              </div>
+              <div class="tv-slide-meta">
+                Enviado por <strong>Vovó Cida</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="tv-slide tv-slide-texto" data-index="2" data-type="texto">
+            <div class="tv-slide-media"></div>
+            <div class="tv-slide-body">
+              <div class="tv-slide-text">
+                “Que a sua vida seja cheia de luz, saúde e muitas alegrias.
+                Estamos ansiosos para te encher de mimos! Com amor, dos seus tios.”
+              </div>
+              <div class="tv-slide-meta">
+                Mensagem escrita por <strong>Tio João e Tia Carla</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="tv-slide" data-index="3" data-type="foto">
+            <div class="tv-slide-media">
+              <div class="tv-slide-photo">
+                <img src="https://images.pexels.com/photos/2253835/pexels-photo-2253835.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="Foto de bebê exemplo 3">
+              </div>
+            </div>
+            <div class="tv-slide-body">
+              <div class="tv-slide-text">
+                “O primeiro soninho. Parece um anjo.”
+              </div>
+              <div class="tv-slide-meta">
+                Enviado por <strong>família</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="tv-slide" data-index="4" data-type="video">
+            <div class="tv-slide-media">
+              <video id="tvVideo" class="tv-video" controls preload="metadata"
+                     poster="https://images.pexels.com/photos/5998139/pexels-photo-5998139.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo HTML5.
+              </video>
+            </div>
+            <div class="tv-slide-body">
+              <div class="tv-slide-text">
+                Um pequeno vídeo de boas-vindas dos avós que moram longe, mas já amam muito.
+                Estamos esperando vocês em casa!
+              </div>
+              <div class="tv-slide-meta">
+                Vídeo enviado por <strong>Vovô Mário</strong>
+              </div>
+            </div>
+          </div>
+
+          <button class="tv-arrow tv-arrow-left" id="tvPrev" aria-label="Anterior">&#10094;</button>
+          <button class="tv-arrow tv-arrow-right" id="tvNext" aria-label="Próximo">&#10095;</button>
+        </div>
+
+        <div class="tv-controls">
+          <div class="tv-dots" id="tvDots">
+            <div class="tv-dot active" data-dot="0"></div>
+            <div class="tv-dot" data-dot="1"></div>
+            <div class="tv-dot" data-dot="2"></div>
+            <div class="tv-dot" data-dot="3"></div>
+            <div class="tv-dot" data-dot="4"></div>
+          </div>
+        </div>
+      </div>
+
+      <section class="tv-groups">
+        <div class="tv-group-card">
+          <div class="tv-group-header">
+            <div class="tv-group-title">Fotos do mural</div>
+            <div class="tv-group-count">3 fotos</div>
+          </div>
+          <div class="tv-group-sub">Imagens que serão exibidas na TV do quarto.</div>
+          <div class="tv-items">
+            <button class="tv-item active" data-go="0">
+              <div class="tv-item-header">
+                <span class="tv-item-title">Foto com a mamãe</span>
+                <span class="tv-item-type">Foto</span>
+              </div>
+              <div class="tv-item-desc">
+                Enviada por Mamãe Ana.
+              </div>
+            </button>
+
+            <button class="tv-item" data-go="1">
+              <div class="tv-item-header">
+                <span class="tv-item-title">Foto dos pezinhos</span>
+                <span class="tv-item-type">Foto</span>
+              </div>
+              <div class="tv-item-desc">
+                Registro enviado pela Vovó Cida.
+              </div>
+            </button>
+
+            <button class="tv-item" data-go="3">
+              <div class="tv-item-header">
+                <span class="tv-item-title">Primeiro soninho</span>
+                <span class="tv-item-type">Foto</span>
+              </div>
+              <div class="tv-item-desc">
+                Foto enviada pela família.
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="tv-group-card">
+          <div class="tv-group-header">
+            <div class="tv-group-title">Vídeos da família</div>
+            <div class="tv-group-count">1 vídeo</div>
+          </div>
+          <div class="tv-group-sub">Trechos em vídeo selecionados para o mural.</div>
+          <div classs="tv-items">
+            <button class="tv-item" data-go="4">
+              <div class="tv-item-header">
+                <span class="tv-item-title">Vídeo – Boas-vindas Vovô</span>
+                <span class="tv-item-type">Vídeo</span>
+              </div>
+              <div class="tv-item-desc">
+                Vídeo de boas-vindas exibido na TV.
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="tv-group-card">
+          <div class="tv-group-header">
+            <div class="tv-group-title">Mensagens da família</div>
+            <div class="tv-group-count">1 mensagem</div>
+          </div>
+          <div class="tv-group-sub">Palavras de carinho e boas-vindas da família.</div>
+          <div class="tv-items">
+            <button class="tv-item" data-go="2">
+              <div class="tv-item-header">
+                <span class="tv-item-title">Mensagem dos tios</span>
+                <span class="tv-item-type">Texto</span>
+              </div>
+              <div class="tv-item-desc">
+                Palavra de carinho escrita por Tio João.
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </section>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* A LÓGICA DO CARROSSEL É IDÊNTICA, NÃO MUDA NADA */
+  const slides = document.querySelectorAll('.tv-slide');
+  const dots   = document.querySelectorAll('.tv-dot');
+  const items  = document.querySelectorAll('.tv-item');
+  const tipoEl = document.getElementById('tvTipoAtual');
+  const contEl = document.getElementById('tvContador');
+  const prevBtn = document.getElementById('tvPrev');
+  const nextBtn = document.getElementById('tvNext');
+  const videoEl = document.getElementById('tvVideo');
+
+  if (!slides.length) return;
+
+  let current = 0;
+  let prevCurrent = 0;
+  const total = slides.length;
+  const intervalMs = 9000;
+  let autoTimer = null;
+
+  function tipoLabel(type){
+    if(type === 'foto')  return 'Fotos da família';
+    if(type === 'video') return 'Vídeos da família';
+    return 'Mensagens de carinho';
+  }
+
+  function stopAuto(){
+    if(autoTimer){
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+  }
+  function startAuto(){
+    stopAuto();
+    autoTimer = setInterval(()=>{
+      const next = (current + 1) % total;
+      showSlide(next);
+    }, intervalMs);
+  }
+
+  function showSlide(index){
+    if(videoEl && prevCurrent === 4 && index !== 4){
+      videoEl.pause();
+      videoEl.currentTime = 0;
+    }
+
+    slides.forEach((slide,i)=>{
+      slide.classList.toggle('active', i===index);
+    });
+    dots.forEach((d,i)=>{
+      d.classList.toggle('active', i===index);
+    });
+    items.forEach((it)=>{
+      it.classList.toggle('active', Number(it.dataset.go) === index);
+    });
+
+    const type = slides[index].dataset.type || 'texto';
+    tipoEl.textContent = tipoLabel(type);
+    contEl.textContent = (index+1)+' de '+total;
+    prevCurrent = current;
+    current = index;
+  }
+
+  dots.forEach((dot,i)=>{
+    dot.addEventListener('click', ()=>{
+      stopAuto();
+      showSlide(i);
+      startAuto();
+    });
+  });
+  items.forEach((it)=>{
+    it.addEventListener('click', ()=>{
+      const idx = Number(it.dataset.go);
+      if(!isNaN(idx)){
+        stopAuto();
+        showSlide(idx);
+        startAuto();
+      }
+    });
+  });
+
+  prevBtn.addEventListener('click', ()=>{
+    stopAuto();
+    const next = (current - 1 + total) % total;
+    showSlide(next);
+    startAuto();
+  });
+  nextBtn.addEventListener('click', ()=>{
+    stopAuto();
+    const next = (current + 1) % total;
+    showSlide(next);
+    startAuto();
+  });
+
+  if(videoEl){
+    videoEl.addEventListener('play', ()=>{
+      stopAuto();
+    });
+    videoEl.addEventListener('ended', ()=>{
+      setTimeout(()=>{ startAuto(); }, 6000);
+    });
+  }
+
+  startAuto();
+})();
+</script>
+
+</body>
+</html>

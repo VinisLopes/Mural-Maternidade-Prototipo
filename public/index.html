@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Santa Casa • Mural do Bebê</title>
+<meta name="description" content="Serviço da Maternidade Santa Casa para criação de mural digital com fotos e mensagens do novo bebê.">
+
+<style>
+:root{
+  --bg:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --primary:#3b82f6; 
+  --primary-50:#eff6ff;
+  --primary-200:#bfdbfe;
+  --primary-strong:#2563eb;
+  --accent:#ec4899; 
+  --accent-soft:#fce7f3;
+  --card:#f8fafc;
+  --line:#e2e8f0;
+  --shadow-sm:0 8px 24px rgba(15,23,42,.08);
+  --shadow-md:0 18px 40px rgba(15,23,42,.14);
+  --radius:18px;
+  --radius-lg:22px;
+  --navh:70px;
+}
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 0 0,#e0f2fe 0,transparent 40%),
+    radial-gradient(circle at 100% 0,#f1f5f9 0,transparent 45%),
+    var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+.page{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+.max{
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 1.5rem;
+}
+@media (max-width:640px){
+  .max{padding:0 1.1rem;}
+}
+.header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(14px);
+  background:linear-gradient(to bottom,rgba(255,255,255,.96),rgba(255,255,255,.88));
+  border-bottom:1px solid rgba(226,232,240,.9);
+}
+.nav{
+  height:var(--navh);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.5rem;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+.logo-mark{
+  width:38px;
+  height:38px;
+  border-radius:38%;
+  background:
+    radial-gradient(circle at 20% 0,#bfdbfe,transparent 55%),
+    radial-gradient(circle at 80% 100%,#f9a8d4,transparent 55%),
+    linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 24px rgba(59,130,246,.4);
+}
+.logo-mark span{
+  color:#eff6ff;
+  font-weight:800;
+  font-size:.85rem;
+  letter-spacing:.06em;
+}
+.logo-text{
+  display:flex;
+  flex-direction:column;
+}
+.logo-text strong{
+  font-size:.95rem;
+  letter-spacing:.08em;
+}
+.logo-text span{
+  font-size:.72rem;
+  color:var(--muted);
+}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  font-size:.9rem;
+}
+.nav-links a{
+  text-decoration:none;
+  color:var(--muted);
+  position:relative;
+}
+.nav-links a:hover{
+  color:var(--primary-strong);
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-.25rem;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--primary-strong),var(--accent));
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform .16s ease-out;
+}
+.nav-links a:hover::after{
+  transform:scaleX(1);
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.35rem;
+  padding:.7rem 1.4rem;
+  border-radius:999px;
+  border:1px solid transparent;
+  font-size:.87rem;
+  font-weight:600;
+  cursor:pointer;
+  text-decoration:none;
+  white-space:nowrap;
+  transition:all .16s ease;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary-strong),var(--primary));
+  color:#ffffff;
+  box-shadow:var(--shadow-md);
+}
+.btn-primary:hover{
+  transform:translateY(-1px);
+  box-shadow:0 20px 50px rgba(59,130,246,.45);
+}
+.btn-outline{
+  background:rgba(255,255,255,.95);
+  border-color:#cbd5e1;
+  color:var(--primary-strong);
+}
+.btn-outline:hover{
+  background:var(--primary-50);
+}
+.hero{
+  padding:2.2rem 0 2.6rem;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:2.1rem;
+  align-items:center;
+}
+.hero-kicker{
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  color:var(--primary);
+  margin-bottom:.55rem;
+}
+.hero-title{
+  font-size:2.55rem;
+  line-height:1.12;
+  letter-spacing:-.04em;
+  margin-bottom:.7rem;
+}
+.hero-sub{
+  font-size:1rem;
+  color:var(--muted);
+  max-width:34rem;
+  margin-bottom:1.25rem;
+}
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.7rem;
+  margin-bottom:1.1rem;
+}
+.hero-note{
+  font-size:.78rem;
+  color:var(--muted);
+}
+.hero-card{
+  position:relative;
+  border-radius:26px;
+  padding:1.4rem 1.6rem 1.7rem;
+  background:
+    radial-gradient(circle at 0 0,rgba(59,130,246,.30),transparent 55%),
+    radial-gradient(circle at 100% 100%,rgba(236,72,153,.25),transparent 55%),
+    linear-gradient(135deg,#0f172a,#1e293b);
+  color:#e5e7eb;
+  box-shadow:0 22px 52px rgba(15,23,42,.55);
+  overflow:hidden;
+}
+.hero-card::before{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:radial-gradient(circle at 0 0,rgba(59,130,246,.28),transparent 55%);
+  opacity:.7;
+  pointer-events:none;
+}
+.hero-card-inner{
+  position:relative;
+  z-index:1;
+}
+.hero-card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:1rem;
+}
+.hero-card-header span{
+  font-size:.85rem;
+  color:#a7b4c6;
+}
+.hero-pill{
+  font-size:.75rem;
+  padding:.25rem .75rem;
+  border-radius:999px;
+  border:1px solid rgba(248,250,252,.35);
+  background:rgba(15,23,42,.85);
+  backdrop-filter:blur(8px);
+}
+.hero-card-body{
+  border-radius:20px;
+  border:1px solid rgba(148,163,184,.5);
+  background:rgba(15,23,42,.9);
+  padding:1.1rem 1.25rem 1.2rem;
+  backdrop-filter:blur(14px);
+  overflow:hidden;
+}
+.hero-slide{
+  display:none;
+  animation:.45s ease-out fadeSlide;
+}
+.hero-slide.active{
+  display:block;
+}
+@keyframes fadeSlide{
+  from{
+    opacity:0;
+    transform:translateY(6px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+.hero-card-title{
+  font-size:1.02rem;
+  font-weight:700;
+  margin-bottom:.25rem;
+}
+.hero-card-title span{
+  color:#93c5fd;
+}
+.hero-card-years{
+  font-size:.86rem;
+  color:#cbd5e1;
+  margin-bottom:.7rem;
+}
+.hero-card-text{
+  font-size:.9rem;
+  line-height:1.45;
+  margin-bottom:1rem;
+  color:#e2e8f0;
+}
+.hero-card-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.45rem;
+}
+.hero-card-tag{
+  font-size:.78rem;
+  padding:.33rem .85rem;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.6);
+  background:rgba(15,23,42,.9);
+}
+.hero-carousel-dots{
+  margin-top:.9rem;
+  display:flex;
+  justify-content:flex-end;
+  gap:.3rem;
+}
+.hero-dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(148,163,184,.6);
+  opacity:.5;
+  transition:all .18s ease;
+}
+.hero-dot.active{
+  width:16px;
+  opacity:1;
+  background:#38bdf8;
+}
+.section{
+  padding:1.7rem 0 2.4rem;
+  border-top:1px solid rgba(226,232,240,.9);
+}
+.section-header{
+  text-align:center;
+  max-width:640px;
+  margin:0 auto 1.7rem;
+}
+.section-kicker{
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:var(--primary);
+  margin-bottom:.3rem;
+}
+.section-title{
+  font-size:1.5rem;
+  margin-bottom:.3rem;
+}
+.section-sub{
+  font-size:.9rem;
+  color:var(--muted);
+}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1.1rem;
+}
+.step{
+  border-radius:var(--radius);
+  background:var(--card);
+  box-shadow:var(--shadow-sm);
+  border:1px solid var(--line);
+  padding:1rem 1.05rem 1.1rem;
+}
+.step-number{
+  width:26px;
+  height:26px;
+  border-radius:999px;
+  background:var(--primary-50);
+  color:var(--primary-strong);
+  font-size:.78rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:.55rem;
+}
+.step-title{
+  font-size:.96rem;
+  margin-bottom:.3rem;
+}
+.step-text{
+  font-size:.86rem;
+  color:var(--muted);
+}
+.benefits-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1rem;
+  margin-top:1.1rem;
+}
+.benefit-card{
+  border-radius:var(--radius);
+  background:#ffffff;
+  border:1px solid var(--line);
+  padding:.95rem 1rem 1.05rem;
+  box-shadow:var(--shadow-sm);
+}
+.benefit-tag{
+  font-size:.75rem;
+  color:var(--primary-strong);
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  margin-bottom:.25rem;
+}
+.benefit-title{
+  font-size:.94rem;
+  margin-bottom:.25rem;
+}
+.benefit-text{
+  font-size:.85rem;
+  color:var(--muted);
+}
+.benefit-list{
+  margin-top:.9rem;
+  font-size:.85rem;
+  color:var(--muted);
+}
+.benefit-list ul{
+  margin:.35rem 0 0 1.1rem;
+  list-style:disc;
+}
+.product-vision{
+  margin-top:1.3rem;
+  border-radius:var(--radius-lg);
+  background:#ffffff;
+  box-shadow:var(--shadow-sm);
+  border:1px solid var(--line);
+  padding:1.5rem 1.6rem 1.6rem;
+}
+.product-vision h3{
+  font-size:1.1rem;
+  margin-bottom:.3rem;
+}
+.product-vision p{
+  font-size:.88rem;
+  color:var(--muted);
+  margin-bottom:1rem;
+}
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:1rem;
+}
+.product-card{
+  border-radius:16px;
+  background:var(--primary-50);
+  border:1px solid var(--primary-200);
+  padding:1rem 1.1rem .95rem;
+}
+.product-card h4{
+  font-size:.96rem;
+  margin-bottom:.25rem;
+}
+.product-card p{
+  font-size:.83rem;
+  color:#1e293b;
+  margin-bottom:.7rem;
+}
+.test-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+}
+.btn-test{
+  font-size:.8rem;
+  padding:.55rem 1rem;
+}
+.footer{
+  margin-top:auto;
+  border-top:1px solid var(--line);
+  background:#f9fafb;
+}
+.footer-inner{
+  max-width:1120px;
+  margin:0 auto;
+  padding:1.1rem 1.5rem 1.4rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:1rem;
+  justify-content:space-between;
+  align-items:center;
+}
+.footer-text{
+  font-size:.8rem;
+  color:var(--muted);
+}
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.7rem;
+  font-size:.8rem;
+}
+.footer-links span{
+  color:#94a3b8;
+}
+@media (max-width:960px){
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+  .hero{
+    padding-top:1.8rem;
+  }
+}
+@media (max-width:800px){
+  .steps{
+    grid-template-columns:1fr;
+  }
+  .product-grid{
+    grid-template-columns:1fr;
+  }
+  .benefits-grid{
+    grid-template-columns:1fr;
+  }
+}
+@media (max-width:720px){
+  .nav{
+    flex-wrap:wrap;
+    gap:.6rem;
+    height: auto; 
+    padding: .5rem 0; 
+  }
+  .nav-links{
+    order:2;
+    width:100%;
+    justify-content:flex-start;
+    gap:1.1rem;
+    font-size:.86rem;
+    margin-top: .5rem; 
+  }
+  .logo { flex-shrink: 0; }
+  .nav > div[style*="display:flex"] {
+      margin-left: auto;
+  }
+}
+@media (max-width: 420px) {
+    .nav > div[style*="display:flex"] {
+        margin-left: 0;
+        width: 100%;
+        order: 3;
+    }
+    .nav > div[style*="display:flex"] a {
+        flex-grow: 1; 
+        justify-content: center;
+    }
+}
+@media (max-width:520px){
+  .hero-title{
+    font-size:2.05rem;
+  }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="max nav">
+      <div class="logo">
+        <div class="logo-mark"><span>SC</span></div>
+        <div class="logo-text">
+          <strong>SANTA CASA</strong>
+          <span>Mural do Bebê</span>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#familia">Para a família</a>
+        <a href="#modulos">Protótipo</a>
+      </nav>
+
+      <div style="display:flex;gap:.5rem;">
+        <a href="#contato" class="btn btn-outline">Falar conosco</a>
+        <a href="#familia" class="btn btn-primary">Conhecer o serviço</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="max hero-grid">
+        <div>
+          <div class="hero-kicker">Maternidade Santa Casa</div>
+          <h1 class="hero-title">
+            Mural digital de boas-vindas<br>para o dia do nascimento.
+          </h1>
+          <p class="hero-sub">
+            A proposta deste serviço é transformar as TVs dos quartos em um espaço de comemoração:
+            um mural digital com fotos, mensagens e vídeos do bebê, enviado pela família e amigos.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#familia" class="btn btn-primary">Entender o serviço</a>
+            <a href="#modulos" class="btn btn-outline">Ver protótipo funcionando</a>
+          </div>
+          <p class="hero-note">
+            Esta página é o <strong>Projeto 1</strong>: site estático de apresentação do serviço.
+            A partir dele você acessa os protótipos do Portal da Família (Projeto 2)
+            e do Painel da Maternidade (Projeto 3).
+          </p>
+        </div>
+
+        <aside class="hero-card" aria-hidden="true">
+          <div class="hero-card-inner">
+            <div class="hero-card-header">
+              <span>Prévia de como aparece na TV</span>
+              <span class="hero-pill">Exemplos de murais</span>
+            </div>
+
+            <div class="hero-card-body">
+              <div class="hero-slide active" data-slide="0">
+                <div class="hero-card-title">
+                  Bem-vinda, <span>Maria Alice!</span>
+                </div>
+                <div class="hero-card-years">
+                  Nasceu em 15/11/2025 • 3.210kg • 49cm
+                </div>
+                <div class="hero-card-text">
+                  “Nossa pequena chegou para iluminar nossas vidas. Este mural reúne as primeiras fotos
+                  e mensagens de carinho da família e amigos.”
+                </div>
+                <div class="hero-card-tags">
+                  <span class="hero-card-tag">Fotos da família</span>
+                  <span class="hero-card-tag">Mensagens dos avós</span>
+                  <span class="hero-card-tag">Boas-vindas</span>
+                </div>
+              </div>
+
+              <div class="hero-slide" data-slide="1">
+                <div class="hero-card-title">
+                  Bem-vindo, <span>Arthur!</span>
+                </div>
+                <div class="hero-card-years">
+                  Nasceu em 14/11/2025 • 3.450kg • 50cm
+                </div>
+                <div class="hero-card-text">
+                  “O mais novo membro da família chegou! Estamos muito felizes em compartilhar
+                  esse momento com todos vocês através deste mural.”
+                </div>
+                <div class="hero-card-tags">
+                  <span class="hero-card-tag">Fotos com os pais</span>
+                  <span class="hero-card-tag">Mensagens dos tios</span>
+                  <span class="hero-card-tag">Felicidade</span>
+                </div>
+              </div>
+
+              <div class="hero-slide" data-slide="2">
+                <div class="hero-card-title">
+                  Bem-vinda, <span>Helena!</span>
+                </div>
+                <div class="hero-card-years">
+                  Nasceu em 13/11/2025 • 2.980kg • 48cm
+                </div>
+                <div class="hero-card-text">
+                  “Pequena e já tão amada. Agradecemos a Deus por sua vida.
+                  O mural traz as primeiras fotos e vídeos desse momento mágico.”
+                </div>
+                <div class="hero-card-tags">
+                  <span class="hero-card-tag">Primeiras fotos</span>
+                  <span class="hero-card-tag">Vídeos da família</span>
+                  <span class="hero-card-tag">Mensagens</span>
+                </div>
+              </div>
+
+              <div class="hero-carousel-dots">
+                <div class="hero-dot active" data-dot="0"></div>
+                <div class="hero-dot" data-dot="1"></div>
+                <div class="hero-dot" data-dot="2"></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona">
+      <div class="max">
+        <div class="section-header">
+          <div class="section-kicker">Fluxo do serviço</div>
+          <h2 class="section-title">Como o mural do bebê funciona na prática.</h2>
+          <p class="section-sub">
+            O serviço foi pensado para ser simples para a família e organizado para a equipe da Santa Casa.
+          </p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Cadastro do nascimento</h3>
+            <p class="step-text">
+              A equipe da Maternidade gera um código do quarto e compartilha com a família.
+              Esse código será usado para acessar e alimentar o mural do bebê.
+            </p>
+          </article>
+          <article class="step">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Família envia fotos</h3>
+            <p class="step-text">
+              Familiares acessam o Portal da Família, preenchem os dados do bebê
+              e enviam fotos, mensagens e vídeos para o mural.
+            </p>
+          </article>
+          <article class="step">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Exibição na TV do quarto</h3>
+            <p class="step-text">
+              A equipe da Maternidade revisa o conteúdo no Painel e escolhe qual mural
+              será exibido em cada TV no quarto da família.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="familia">
+      <div class="max">
+        <div class="section-header">
+          <div class="section-kicker">Apresentação do serviço</div>
+          <h2 class="section-title">O que o mural entrega para a família e para a Maternidade.</h2>
+          <p class="section-sub">
+            Esta seção descreve o valor do serviço para a família e o ganho de organização para a instituição.
+          </p>
+        </div>
+
+        <div class="benefits-grid">
+          <article class="benefit-card">
+            <div class="benefit-tag">Para a família</div>
+            <h3 class="benefit-title">Participação de todos em um único lugar</h3>
+            <p class="benefit-text">
+              Avós, tios, amigos e colegas podem contribuir com fotos, mensagens e vídeos de boas-vindas
+              para o novo bebê. Tudo é reunido em um único mural.
+            </p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-tag">Durante a estadia</div>
+            <h3 class="benefit-title">Boas-vindas em exibição nas TVs do quarto</h3>
+            <p class="benefit-text">
+              As telas deixam de mostrar apenas a programação normal e passam a exibir as fotos e mensagens
+              para o bebê, celebrando a vida.
+            </p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-tag">Depois da alta</div>
+            <h3 class="benefit-title">Memória digital que continua acessível</h3>
+            <p class="benefit-text">
+              O mural pode ser mantido como registro digital, permitindo que a família
+              revisite as mensagens e compartilhe o link com quem não pôde visitar.
+            </p>
+          </article>
+        </div>
+
+        <div class="benefit-list">
+          <strong>Para a Santa Casa, o serviço também traz benefícios:</strong>
+          <ul>
+            <li>Organização dos nascimentos do dia por código de quarto.</li>
+            <li>Centralização do conteúdo em um único painel de administração.</li>
+            <li>Controle sobre quais murais serão exibidos em cada TV de quarto.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="modulos">
+      <div class="max">
+        <div class="section-header">
+          <div class="section-kicker">Protótipo do sistema</div>
+          <h2 class="section-title">Como o serviço foi transformado em protótipo funcional.</h2>
+          <p class="section-sub">
+            A partir da ideia do serviço, foram criados três módulos:
+            um site estático de apresentação (esta página),
+            um Portal da Família (Projeto 2) e um Painel da Maternidade com modo TV (Projeto 3).
+          </p>
+        </div>
+
+        <div class="product-vision">
+          <h3>Navegação entre os módulos para demonstração</h3>
+          <p>
+            Os botões abaixo permitem navegar pelos protótipos na mesma aba do navegador,
+            simulando o uso real do sistema em produção.
+          </p>
+
+          <div class="product-grid">
+            <article class="product-card">
+              <h4>Portal da Família • Projeto 2</h4>
+              <p>
+                Ambiente onde a família, com um código do quarto, cria e edita o mural do bebê:
+                dados do nascimento, fotos, vídeos e mensagens.
+              </p>
+              <div class="test-buttons">
+                
+                <a href="/memorias/clientes/login.html" class="btn btn-primary btn-test">
+                  Abrir Portal da Família
+                </a>
+                </div>
+            </article>
+
+            <article class="product-card" style="background:#fdf2f8;border-color:#fbcfe8;">
+              <h4>Painel da Maternidade • Projeto 3</h4>
+              <p>
+                Área usada pela equipe da Santa Casa para visualizar os murais criados,
+                aprovar o conteúdo e enviar o mural para a TV do quarto.
+              </p>
+              <div class="test-buttons">
+                
+                <a href="/admin/login.htm" class="btn btn-outline btn-test" style="border-color:#ec4899;color:#be185d;">
+                  Abrir Painel da Maternidade
+                </a>
+                </div>
+            </article>
+          </div>
+
+          <p style="font-size:.8rem;color:var(--muted);margin-top:.9rem;">
+            Dica para apresentação: primeiro mostre o serviço aqui no site estático,
+            depois clique em <strong>Portal da Família</strong> para criar um mural
+            e, por fim, acesse o <strong>Painel da Maternidade</strong> para aprovar
+            e enviar o mural para a TV.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="max">
+        <div class="section-header">
+          <div class="section-kicker">Contato</div>
+          <h2 class="section-title">Falar com a equipe Santa Casa</h2>
+          <p class="section-sub">
+            Nesta área, no futuro, podem ser inseridos contatos reais, WhatsApp, formulário ou integração
+            com chatbot. Para a apresentação, funciona como seção ilustrativa.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-text">
+        Protótipo acadêmico do serviço <strong>Santa Casa • Mural do Bebê</strong>.
+      </div>
+      <div class="footer-links">
+        <span>Projeto 1: Site estático</span>
+        <span>•</span>
+        <span>Projeto 2: Portal da Família</span>
+        <span>•</span>
+        <span>Projeto 3: Painel Maternidade / TV</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots   = document.querySelectorAll('.hero-dot');
+  if (!slides.length || !dots.length) return;
+
+  let current = 0;
+  const total = slides.length;
+  const intervalMs = 6000; 
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+    current = index;
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => showSlide(i));
+  });
+
+  setInterval(() => {
+    const next = (current + 1) % total;
+    showSlide(next);
+  }, intervalMs);
+})();
+</script>
+
+</body>
+</html>

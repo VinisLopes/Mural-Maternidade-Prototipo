@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Santa Casa • Painel Maternidade</title>
+
+<style>
+:root{
+  --bg:#f9fafb;
+  --surface:#ffffff;
+  --surface-soft:#f3f4f6;
+  --surface-light:#e5e7eb;
+  --primary:#3b82f6; 
+  --primary-soft:rgba(59,130,246,.1);
+  --accent:#ec4899; 
+  --warning:#f59e0b; 
+  --text:#1f2937;
+  --muted:#6b7280;
+  --danger:#ef4444;
+  --radius:18px;
+  --shadow:0 25px 40px rgba(0,0,0,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:system-ui,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 0 0,rgba(59,130,246,.05),transparent 55%),
+    radial-gradient(circle at 100% 100%,rgba(236,72,153,.03),transparent 55%),
+    var(--bg);
+  color:var(--text);
+  padding:2rem;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:2.4rem;
+  animation:fadeUp .6s ease-out;
+}
+.header-logo{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+.logo-ball{
+  width:38px;height:38px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 20%,#a5b4fc,var(--primary));
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:600;
+  color:#fff;
+  box-shadow:0 10px 25px rgba(59,130,246,.4);
+}
+.header-logo-text-top{
+  font-size:.9rem;
+  color:var(--muted);
+}
+.header-logo-text-bottom{
+  font-size:1.1rem;
+}
+.header-links{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+.header-links a{
+  color:var(--primary);
+  text-decoration:none;
+  font-size:.95rem;
+  padding:.45rem .9rem;
+  border-radius:999px;
+  border:1px solid transparent;
+  background:var(--surface);
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  transition:all .18s ease;
+}
+.header-links a:hover{
+  border-color:rgba(191,219,254,.7);
+  background:var(--primary-soft);
+  transform:translateY(-1px);
+}
+.panel-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:2rem;
+  animation:fadeUp .6s ease-out .05s backwards;
+}
+.card{
+  background:radial-gradient(circle at 0 0,rgba(59,130,246,.08),transparent 60%),
+             var(--surface);
+  padding:1.6rem 1.7rem 1.5rem;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  border:1px solid var(--line);
+}
+.card h2{
+  margin-bottom:.6rem;
+  font-size:1.25rem;
+}
+.card-sub{
+  color:var(--muted);
+  font-size:.9rem;
+  margin-bottom:1.3rem;
+}
+.filters{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1rem;
+  font-size:.85rem;
+}
+.filters-left{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+}
+.filters label{
+  color:var(--muted);
+}
+.input-search{
+  background:var(--surface-soft);
+  border-radius:999px;
+  border:1px solid var(--line);
+  padding:.45rem .9rem;
+  color:var(--text);
+  font-size:.85rem;
+  min-width:190px;
+  outline:none;
+}
+.input-search::placeholder{color:#9ca3af;}
+.input-search:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 1px rgba(59,130,246,.45);
+}
+.select-status{
+  background:var(--surface-soft);
+  border-radius:999px;
+  border:1px solid var(--line);
+  padding:.45rem .9rem;
+  color:var(--text);
+  font-size:.85rem;
+  outline:none;
+}
+.table-wrapper{
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:var(--surface);
+}
+.table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.95rem;
+}
+.table thead{
+  background:var(--surface-soft);
+}
+.table th{
+  text-align:left;
+  padding:.75rem .9rem;
+  color:var(--muted);
+  font-weight:500;
+  border-bottom:1px solid var(--line);
+}
+.table tbody tr{
+  transition:background .16s ease;
+}
+.table td{
+  padding:.85rem .9rem;
+  border-bottom:1px solid var(--line);
+}
+.table tbody tr:hover{
+  background:var(--surface-soft);
+}
+.badge{
+  padding:.35rem .75rem;
+  border-radius:999px;
+  font-size:.78rem;
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  font-weight:500;
+}
+.badge-dot{
+  width:7px;height:7px;
+  border-radius:999px;
+}
+.badge-ok{
+  background:rgba(34,197,94,.1);
+  color:#16a34a;
+}
+.badge-ok .badge-dot{
+  background:#22c55e;
+}
+.badge-wait{
+  background:rgba(245,158,11,.1);
+  color:#d97706;
+}
+.badge-wait .badge-dot{
+  background:var(--warning);
+}
+.badge-review{
+  background:rgba(239,68,68,.1);
+  color:var(--danger);
+}
+.badge-review .badge-dot{
+  background:var(--danger);
+}
+.actions-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.45rem;
+}
+.action-btn{
+  padding:.4rem .95rem;
+  border-radius:999px;
+  border:1px solid var(--surface-light);
+  background:var(--surface);
+  color:var(--text);
+  font-size:.8rem;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  transition:all .16s ease;
+}
+.action-btn span{
+  font-size:.9rem;
+}
+.action-btn-primary{
+  border-color:rgba(59,130,246,.8);
+  background:var(--primary-soft);
+  color: var(--primary-strong);
+}
+.action-btn-primary span{
+  color:var(--primary);
+}
+.action-btn:hover{
+  border-color:var(--muted);
+  background:var(--surface-soft);
+  transform:translateY(-1px);
+  box-shadow:0 12px 30px rgba(0,0,0,.05);
+}
+.action-btn-primary:hover{
+  background:rgba(59,130,246,.2);
+  border-color: var(--primary);
+}
+.info-card{
+  background:radial-gradient(circle at 100% 0,rgba(59,130,246,.1),transparent 55%),
+             var(--surface);
+  padding:1.6rem 1.7rem;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  border:1px solid var(--line);
+  height:fit-content;
+}
+.info-card h3{
+  margin-bottom:.65rem;
+  font-size:1.1rem;
+}
+.info-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  padding:.25rem .65rem;
+  border-radius:999px;
+  background:var(--surface-soft);
+  border:1px solid var(--line);
+  color:var(--muted);
+  font-size:.75rem;
+  margin-bottom:.9rem;
+}
+.info-card p{
+  color:var(--muted);
+  font-size:.9rem;
+  margin-bottom:.75rem;
+}
+.info-card ul{
+  margin-left:1.1rem;
+  line-height:1.6;
+  font-size:.9rem;
+  color:var(--muted);
+}
+.info-card li + li{
+  margin-top:.15rem;
+}
+@media(max-width:960px){
+  body{padding:1.5rem;}
+  .panel-grid{
+    grid-template-columns:1fr;
+  }
+}
+@media (max-width: 768px) {
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  .table {
+    min-width: 650px; 
+  }
+  .table th, .table td {
+    white-space: nowrap;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">
+    <div class="logo-ball">SC</div>
+    <div>
+      <div class="header-logo-text-top">SANTA CASA</div>
+      <div class="header-logo-text-bottom">Painel Maternidade</div>
+    </div>
+  </div>
+
+  <nav class="header-links">
+    <a href="/index.html">Site do serviço</a>
+    <a href="#" id="abrirTVTopo">Abrir modo TV</a>
+  </nav>
+</header>
+
+<div class="panel-grid">
+
+  <section class="card">
+    <h2>Nascimentos do dia</h2>
+    <div class="card-sub">
+      Lista de nascimentos com murais criados pela família. A equipe pode revisar o conteúdo e enviar o mural para a TV do quarto correspondente.
+    </div>
+
+    <div class="filters">
+      <div class="filters-left">
+        <label for="search">Buscar:</label>
+        <input id="search" class="input-search" type="text" placeholder="Nome do bebê ou código...">
+      </div>
+
+      <div>
+        <label for="statusFilter">Status:</label>
+        <select id="statusFilter" class="select-status">
+          <option value="todos">Todos</option>
+          <option value="aprovado">Aprovado</option>
+          <option value="pendente">Pendente</option>
+          <option value="revisar">Revisar</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="table" id="tabelaVelorios">
+        <thead>
+          <tr>
+            <th>Bebê / Família</th>
+            <th>Código / Quarto</th>
+            <th>Status</th>
+            <th style="width:240px;">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-status="aprovado">
+            <td>Maria Alice (Família Silva)</td>
+            <td>12345 • Quarto 101</td>
+            <td>
+              <span class="badge badge-ok">
+                <span class="badge-dot"></span>
+                Aprovado
+              </span>
+            </td>
+            <td>
+              <div class="actions-row">
+                <button class="action-btn action-btn-primary" onclick="abrirTV()">
+                  <span>▶</span> Exibir na TV
+                </button>
+                <button class="action-btn" onclick="abrirMuralFamilia()">
+                  <span>👁</span> Ver mural
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr data-status="pendente">
+            <td>Arthur (Família Oliveira)</td>
+            <td>67890 • Quarto 103</td>
+            <td>
+              <span class="badge badge-wait">
+                <span class="badge-dot"></span>
+                Pendente
+              </span>
+            </td>
+            <td>
+              <div class="actions-row">
+                <button class="action-btn action-btn-primary" onclick="abrirTV()">
+                  <span>▶</span> Exibir na TV
+                </button>
+                <button class="action-btn" onclick="abrirMuralFamilia()">
+                  <span>✏</span> Revisar conteúdo
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr data-status="revisar">
+            <td>Helena (Família Costa)</td>
+            <td>43210 • Quarto 102</td>
+            <td>
+              <span class="badge badge-review">
+                <span class="badge-dot"></span>
+                Revisar
+              </span>
+            </td>
+            <td>
+              <div class="actions-row">
+                <button class="action-btn action-btn-primary" onclick="abrirTV()">
+                  <span>▶</span> Exibir na TV
+                </button>
+                <button class="action-btn" onclick="abrirMuralFamilia()">
+                  <span>👁</span> Ver mural
+                </button>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <aside class="info-card">
+    <span class="info-badge">
+      ℹ Visão geral do painel
+    </span>
+    <h3>Como funciona este painel</h3>
+    <p>
+      Este é um protótipo do painel usado pela equipe da Maternidade Santa Casa para acompanhar os nascimentos do dia e programar quais murais serão exibidos nas TVs dos quartos.
+    </p>
+    <ul>
+      <li>Visualizar os murais criados pela família para cada bebê.</li>
+      <li>Conferir fotos, vídeos e mensagens enviados.</li>
+      <li>Aprovar o conteúdo e associar o mural ao quarto.</li>
+      <li>Usar o botão <strong>“Exibir na TV”</strong> para abrir o modo TV na mesma tela.</li>
+    </ul>
+  </aside>
+
+</div>
+
+<script>
+/* Navegação: SEM nova aba, sempre na mesma */
+
+/* ATUALIZAÇÃO 2: Link corrigido para / */
+function abrirTV(){
+  window.location = "/memorial.html";
+}
+
+/* ATUALIZAÇÃO 3: Link corrigido para / */
+function abrirMuralFamilia(){
+  window.location = "/memorias/clientes/index.html";
+}
+
+/* botão do topo */
+document.getElementById("abrirTVTopo").addEventListener("click", function(e){
+  e.preventDefault();
+  abrirTV();
+});
+
+/* Filtro de busca + status */
+const searchInput = document.getElementById("search");
+const statusFilter = document.getElementById("statusFilter");
+const linhas = Array.from(document.querySelectorAll("#tabelaVelorios tbody tr"));
+
+function aplicarFiltros(){
+  const termo = searchInput.value.toLowerCase().trim();
+  const statusSelecionado = statusFilter.value; 
+
+  linhas.forEach(tr => {
+    const textoLinha = tr.innerText.toLowerCase();
+    const statusLinha = tr.getAttribute("data-status");
+    const passaBusca = !termo || textoLinha.includes(termo);
+    const passaStatus = (statusSelecionado === "todos") || (statusSelecionado === statusLinha);
+
+    tr.style.display = (passaBusca && passaStatus) ? "" : "none";
+  });
+}
+
+searchInput.addEventListener("input", aplicarFiltros);
+statusFilter.addEventListener("change", aplicarFiltros);
+</script>
+
+</body>
+</html>

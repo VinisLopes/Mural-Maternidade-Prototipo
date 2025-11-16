@@ -8,17 +8,15 @@
 
 <style>
 :root{
-  /* TEMA ATUALIZADO (Cores Claras, mas frame escuro para TV) */
-  --bg:#f0f9ff; /* Fundo azul bem claro */
-  --surface:#020617; /* Frame escuro mantido para contraste de TV */
+  --bg:#f0f9ff; 
+  --surface:#020617; 
   --primary:#38bdf8;
-  --accent:#ec4899; /* Rosa */
+  --accent:#ec4899; 
   --text:#e5e7eb;
   --muted:#9ca3af;
   --shadow:0 30px 80px rgba(0,0,0,.35);
   --radius:28px;
 }
-
 *,
 *::before,
 *::after{
@@ -35,10 +33,8 @@ body{
     radial-gradient(circle at 0 0,rgba(59,130,246,.1),transparent 55%),
     radial-gradient(circle at 100% 100%,rgba(236,72,153,.08),transparent 55%),
     var(--bg);
-  color:var(--text); /* Texto claro, pois o frame é escuro */
+  color:var(--text); 
 }
-
-/* LAYOUT GERAL – MODO TV */
 .tv-wrapper{
   min-height:100vh;
   padding:2.6rem 3.2rem;
@@ -60,8 +56,6 @@ body{
   position:relative;
   overflow:hidden;
 }
-
-/* TOPO */
 .tv-header{
   display:flex;
   justify-content:space-between;
@@ -99,15 +93,11 @@ body{
   border:1px solid rgba(148,163,184,.6);
   background:rgba(15,23,42,.85);
 }
-
-/* MAIN = MURAL + GRUPOS */
 .tv-main{
   display:flex;
   flex-direction:column;
   gap:1.6rem;
 }
-
-/* CARROSSEL PRINCIPAL */
 .tv-carousel{
   border-radius:24px;
   border:1px solid rgba(148,163,184,.55);
@@ -131,8 +121,6 @@ body{
   font-size:.82rem;
   color:var(--muted);
 }
-
-/* ÁREA DE MÍDIA (ONDE FICA A FOTO/VIDEO + SETAS) */
 .tv-media-wrapper{
   position:relative;
   margin-bottom:1.2rem;
@@ -144,13 +132,10 @@ body{
 .tv-slide.active{
   display:block;
 }
-
 @keyframes fadeInUp{
   from{opacity:0;transform:translateY(10px);}
   to{opacity:1;transform:translateY(0);}
 }
-
-/* SLIDE COM FOTO / VÍDEO */
 .tv-slide-media{
   border-radius:20px;
   background:#000000;
@@ -173,14 +158,12 @@ body{
   display:block;
   background:#000;
 }
-
 .tv-slide-texto .tv-slide-media{
   display:none;
 }
 .tv-slide-texto .tv-slide-body{
   padding:2.4rem 3rem 1.8rem;
 }
-
 .tv-slide-body{
   padding:1.1rem 1.4rem 0;
 }
@@ -196,7 +179,6 @@ body{
   color:var(--muted);
   text-align:center;
 }
-
 .tv-arrow{
   position:absolute;
   top:50%;
@@ -220,7 +202,6 @@ body{
   opacity:.4;
   cursor:default;
 }
-
 .tv-controls{
   display:flex;
   justify-content:center;
@@ -246,8 +227,6 @@ body{
   opacity:1;
   background:var(--primary);
 }
-
-/* GRUPOS DE ITENS (FOTOS / VÍDEOS / TEXTOS) */
 .tv-groups{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -278,8 +257,6 @@ body{
   color:var(--muted);
   margin-bottom:.7rem;
 }
-
-/* LISTA DE ITENS DENTRO DOS GRUPOS */
 .tv-items{
   display:flex;
   flex-direction:column;
@@ -340,8 +317,6 @@ body{
 .tv-item:hover{
   border-color:rgba(129,140,248,.9);
 }
-
-/* RESPONSIVO BÁSICO */
 @media (max-width:1000px){
   .tv-wrapper{
     padding:1.6rem 1.8rem;
@@ -351,8 +326,6 @@ body{
     grid-template-columns:1fr;
   }
 }
-
-/* ATUALIZAÇÃO DE RESPONSIVIDADE */
 @media (max-width: 600px) {
   .tv-wrapper {
     padding: 1rem;
@@ -370,10 +343,9 @@ body{
   .tv-name { font-size: 1.5rem; }
   .tv-quote { font-size: .9rem; }
   .tv-badge { align-self: flex-start; }
-
   .tv-item-title {
     max-width: 100%;
-    white-space: normal; /* Permite quebra de linha */
+    white-space: normal; 
     font-size: .85rem;
   }
   .tv-item-desc {
@@ -601,7 +573,6 @@ body{
 
 <script>
 (function () {
-  /* A LÓGICA DO CARROSSEL É IDÊNTICA, NÃO MUDA NADA */
   const slides = document.querySelectorAll('.tv-slide');
   const dots   = document.querySelectorAll('.tv-dot');
   const items  = document.querySelectorAll('.tv-item');

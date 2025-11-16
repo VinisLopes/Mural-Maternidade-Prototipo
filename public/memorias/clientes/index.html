@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portal da Família • Mural de Homenagens</title>
+<title>Portal da Família • Mural do Bebê</title>
 
 <style>
 :root{
@@ -11,24 +11,21 @@
   --paper:#ffffff;
   --text:#0f172a;
   --muted:#64748b;
-  --primary:#1e40af;
+  --primary:#3b82f6; 
   --primary-50:#eef3ff;
-  --primary-200:#c7d7ff;
-  --primary-600:#1d4ed8;
-  --accent:#22c55e;
+  --primary-200:#bfdbfe;
+  --primary-600:#2563eb;
+  --accent:#ec4899; 
   --line:#e2e8f0;
   --shadow:0 14px 34px rgba(15,23,42,.12);
   --radius:20px;
 }
-
 *,
 *::before,
 *::after{box-sizing:border-box;margin:0;padding:0}
 html,body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);}
 body{min-height:100vh;}
-
 .page{min-height:100vh;display:flex;flex-direction:column;}
-
 header{
   background:#fff;
   border-bottom:1px solid var(--line);
@@ -60,7 +57,7 @@ header{
   background:
     radial-gradient(circle at 0 0,#93c5fd,transparent 55%),
     radial-gradient(circle at 100% 100%,#a5f3fc,transparent 55%),
-    #1e40af;
+    var(--primary);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -75,7 +72,6 @@ header{
 }
 .logo-text strong{font-size:.95rem;}
 .logo-text span{font-size:.75rem;color:var(--muted);}
-
 .header-links{
   display:flex;
   gap:.6rem;
@@ -85,8 +81,6 @@ header{
   text-decoration:none;
   color:var(--primary-600);
 }
-
-/* MAIN */
 main{
   flex:1;
   padding:1.8rem 0 2.4rem;
@@ -115,8 +109,6 @@ main{
   color:var(--muted);
   margin-bottom:1.1rem;
 }
-
-/* Resumo do falecido */
 .resume{
   border-radius:16px;
   background:var(--primary-50);
@@ -138,8 +130,6 @@ main{
   color:var(--muted);
   margin-top:.15rem;
 }
-
-/* Campos */
 .field-group{margin-bottom:.75rem;}
 label{
   display:block;
@@ -156,8 +146,6 @@ input,textarea,select{
   background:#fff;
 }
 textarea{resize:vertical;}
-
-/* Abas */
 .tabs{
   display:flex;
   gap:.4rem;
@@ -178,8 +166,6 @@ textarea{resize:vertical;}
 }
 .tab-panel{display:none;}
 .tab-panel.active{display:block;}
-
-/* Botão principal */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -190,13 +176,11 @@ textarea{resize:vertical;}
   font-size:.88rem;
   font-weight:600;
   cursor:pointer;
-  background:linear-gradient(135deg,#1d4ed8,#2563eb);
+  background:linear-gradient(135deg,var(--primary-600),var(--primary));
   color:#fff;
   width:100%;
   margin-top:.9rem;
 }
-
-/* Lista mural */
 .list-card{
   border-radius:var(--radius);
   border:1px dashed var(--line);
@@ -225,10 +209,8 @@ textarea{resize:vertical;}
 }
 .item.selected{
   border-color:var(--primary-200);
-  background:#eff6ff;
+  background:var(--primary-50);
 }
-
-/* Pré-visualização detalhada */
 .preview{
   margin-top:1rem;
   border-radius:16px;
@@ -307,21 +289,17 @@ textarea{resize:vertical;}
 }
 .preview-dot.active{
   width:14px;
-  background:#1d4ed8;
+  background:var(--primary);
 }
 .preview-desc{
   font-size:.82rem;
   color:#64748b;
 }
-
-/* nota */
 .side-note{
   font-size:.78rem;
   color:var(--muted);
   margin-top:.75rem;
 }
-
-/* Responsivo */
 @media (max-width:900px){
   .grid{
     grid-template-columns:1fr;
@@ -339,17 +317,17 @@ textarea{resize:vertical;}
 <header>
   <div class="header-inner">
     <div class="logo">
-      <div class="logo-mark">OF</div>
+      <div class="logo-mark">SC</div>
       <div class="logo-text">
-        <strong>OFEBAS</strong>
+        <strong>SANTA CASA</strong>
         <span>Portal da Família</span>
       </div>
     </div>
 
     <div class="header-links">
-      <a href="/index.html">Voltar ao site do serviço</a>
+      <a href="../../index.html">Voltar ao site do serviço</a>
       <span>•</span>
-      <a href="/memorial.html">Ver modo TV (exemplo)</a>
+      <a href="../../memorial.html">Ver modo TV (exemplo)</a>
       </div>
   </div>
 </header>
@@ -358,49 +336,49 @@ textarea{resize:vertical;}
   <div class="grid">
 
     <section class="card">
-      <h2 class="card-title">Mural da família</h2>
+      <h2 class="card-title">Mural do bebê</h2>
       <p class="card-sub">
-        Preencha os dados abaixo para identificar o velório e a pessoa falecida.
-        Depois adicione fotos, vídeos e textos ao mural.
+        Preencha os dados abaixo para identificar o bebê.
+        Depois adicione fotos, vídeos e mensagens de carinho ao mural.
       </p>
 
       <div class="resume">
-        <div class="resume-title">Resumo do mural</div>
-        <div class="resume-name" id="resNome">Nome do falecido</div>
-        <div class="resume-meta" id="resAnos">Ano de nascimento – ano de falecimento</div>
-        <div class="resume-meta" id="resFrase">Frase que representa essa pessoa.</div>
+        <div class="resume-title">Resumo do bebê</div>
+        <div class="resume-name" id="resNome">Nome do bebê</div>
+        <div class="resume-meta" id="resAnos">Data de nascimento • Peso</div>
+        <div class="resume-meta" id="resFrase">Frase de boas-vindas.</div>
         <div class="resume-meta" id="resResp">Responsável: —</div>
       </div>
 
       <div class="field-group">
-        <label for="falecidoNome">Nome completo do falecido</label>
-        <input id="falecidoNome" type="text" placeholder="Ex: Maria Aparecida de Souza">
+        <label for="bebeNome">Nome completo do bebê</label>
+        <input id="bebeNome" type="text" placeholder="Ex: Maria Alice da Silva">
       </div>
 
       <div class="field-group">
-        <label for="falecidoNasc">Ano de nascimento</label>
-        <input id="falecidoNasc" type="number" placeholder="Ex: 1945">
+        <label for="bebeNasc">Data de nascimento</label>
+        <input id="bebeNasc" type="text" placeholder="Ex: 15/11/2025">
       </div>
 
       <div class="field-group">
-        <label for="falecidoFal">Ano de falecimento</label>
-        <input id="falecidoFal" type="number" placeholder="Ex: 2025">
+        <label for="bebePeso">Peso e altura</label>
+        <input id="bebePeso" type="text" placeholder="Ex: 3.210kg • 49cm">
       </div>
 
       <div class="field-group">
-        <label for="falecidoFrase">Frase que representa a pessoa</label>
-        <input id="falecidoFrase" type="text" placeholder="Ex: “Gratidão em cada gesto.”">
+        <label for="bebeFrase">Frase de boas-vindas</label>
+        <input id="bebeFrase" type="text" placeholder="Ex: “Nossa alegria chegou!”">
       </div>
 
       <div class="field-group">
-        <label for="responsavel">Responsável pelo mural</label>
-        <input id="responsavel" type="text" placeholder="Ex: vinícius (filho)">
+        <label for="responsavel">Responsável pelo mural (Ex: Mãe, Pai)</label>
+        <input id="responsavel" type="text" placeholder="Ex: mamãe Ana">
       </div>
 
       <div class="tabs">
         <button class="tab active" data-tab="fotos">Fotos</button>
         <button class="tab" data-tab="videos">Galeria (até 5 fotos/vídeos)</button>
-        <button class="tab" data-tab="textos">Textos & Poemas</button>
+        <button class="tab" data-tab="textos">Mensagens</button>
       </div>
 
       <div class="tab-panel active" data-panel="fotos">
@@ -410,7 +388,7 @@ textarea{resize:vertical;}
         </div>
         <div class="field-group">
           <label for="fotoMensagem">Mensagem sobre esta foto</label>
-          <textarea id="fotoMensagem" rows="3" placeholder="Ex: Foto do aniversário de 70 anos."></textarea>
+          <textarea id="fotoMensagem" rows="3" placeholder="Ex: A primeira foto com a mamãe."></textarea>
         </div>
         <button class="btn" id="btnAddFoto">Adicionar foto ao mural</button>
       </div>
@@ -425,34 +403,34 @@ textarea{resize:vertical;}
         </div>
         <div class="field-group">
           <label for="videoMensagem">Mensagem associada à galeria</label>
-          <textarea id="videoMensagem" rows="3" placeholder="Ex: Homenagens dos colegas de trabalho."></textarea>
+          <textarea id="videoMensagem" rows="3" placeholder="Ex: Mensagens em vídeo dos avós."></textarea>
         </div>
         <button class="btn" id="btnAddVideo">Adicionar galeria ao mural</button>
       </div>
 
       <div class="tab-panel" data-panel="textos">
         <div class="field-group">
-          <label for="textoTitulo">Título do texto</label>
-          <input id="textoTitulo" type="text" placeholder="Ex: Poema, oração ou lembrança">
+          <label for="textoTitulo">Título da mensagem</label>
+          <input id="textoTitulo" type="text" placeholder="Ex: Dos avós, dos tios, etc.">
         </div>
         <div class="field-group">
           <label for="textoConteudo">Conteúdo</label>
-          <textarea id="textoConteudo" rows="4" placeholder="Escreva aqui a mensagem, poema ou oração."></textarea>
+          <textarea id="textoConteudo" rows="4" placeholder="Escreva aqui a mensagem de boas-vindas."></textarea>
         </div>
-        <button class="btn" id="btnAddTexto">Adicionar texto ao mural</button>
+        <button class="btn" id="btnAddTexto">Adicionar mensagem ao mural</button>
       </div>
 
     </section>
 
     <section class="card">
-      <h2 class="card-title">Conteúdo do mural</h2>
+      <h2 class="card-title">Mural do bebê</h2>
       <p class="card-sub">
-        Estes são os itens que poderão aparecer na TV do velório, após aprovação da OFEBAS.
+        Estes são os itens que poderão aparecer na TV do quarto, após aprovação da Maternidade.
       </p>
 
       <div class="list-card" id="listaMural">
         <p class="list-empty">
-          Nenhum item foi adicionado ainda. Comece incluindo uma foto, galeria ou texto usando o painel ao lado.
+          Nenhum item foi adicionado ainda. Comece incluindo uma foto, galeria ou mensagem usando o painel ao lado.
         </p>
       </div>
 
@@ -465,7 +443,7 @@ textarea{resize:vertical;}
 
       <p class="side-note">
         Obs.: este é um protótipo. Em uma versão completa, estes itens seriam enviados para o Painel da
-        Administração OFEBAS, que escolheria o que será exibido em cada TV.
+        Maternidade, que escolheria o que será exibido em cada TV.
       </p>
     </section>
 
@@ -474,26 +452,24 @@ textarea{resize:vertical;}
 </div>
 
 <script>
-// ======================= RESUMO BÁSICO =======================
 function atualizarResumo(){
-  const nome = document.getElementById('falecidoNome').value || 'Nome do falecido';
-  const nasc = document.getElementById('falecidoNasc').value || 'Ano de nascimento';
-  const fal  = document.getElementById('falecidoFal').value || 'Ano de falecimento';
-  const frase= document.getElementById('falecidoFrase').value || 'Frase que representa essa pessoa.';
+  const nome = document.getElementById('bebeNome').value || 'Nome do bebê';
+  const nasc = document.getElementById('bebeNasc').value || 'Data de nascimento';
+  const peso = document.getElementById('bebePeso').value || 'Peso';
+  const frase= document.getElementById('bebeFrase').value || 'Frase de boas-vindas.';
   const resp = document.getElementById('responsavel').value || '—';
 
   document.getElementById('resNome').textContent = nome;
-  document.getElementById('resAnos').textContent = `${nasc} – ${fal}`;
+  document.getElementById('resAnos').textContent = `${nasc} • ${peso}`;
   document.getElementById('resFrase').textContent = frase;
   document.getElementById('resResp').textContent  = `Responsável: ${resp}`;
 }
 
-['falecidoNome','falecidoNasc','falecidoFal','falecidoFrase','responsavel']
+['bebeNome','bebeNasc','bebePeso','bebeFrase','responsavel']
   .forEach(id=>{
     document.getElementById(id).addEventListener('input',atualizarResumo);
   });
 
-// ======================= ABAS =======================
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('.tab-panel');
 tabs.forEach(tab=>{
@@ -505,10 +481,9 @@ tabs.forEach(tab=>{
   });
 });
 
-// ======================= DADOS DO MURAL =======================
-let mural = [];            // [{tipo, desc, arquivos?:[{url,type}]}]
-let previewIndex = null;   // índice do item atualmente em preview
-let previewSlide = 0;      // índice da foto dentro da galeria
+let mural = [];
+let previewIndex = null;
+let previewSlide = 0;
 
 function renderLista(){
   const lista = document.getElementById('listaMural');
@@ -538,7 +513,6 @@ function renderLista(){
     lista.appendChild(div);
   });
 
-  // se ainda não há preview, mostra o primeiro por padrão
   if(previewIndex === null){
     const first = lista.querySelector('.item');
     if(first){
@@ -555,7 +529,6 @@ function showPreview(index){
   const area = document.getElementById('previewArea');
   const item = mural[index];
 
-  // item sem arquivos (texto/poema)
   if(!item.arquivos || item.arquivos.length === 0){
     area.innerHTML = `
       <div class="preview-title">${item.tipo}</div>
@@ -564,7 +537,6 @@ function showPreview(index){
     return;
   }
 
-  // item com 1 ou mais arquivos (foto ou galeria)
   const qtd = item.arquivos.length;
   const isGaleria = qtd > 1;
 
@@ -591,7 +563,6 @@ function showPreview(index){
   const prevBtn = area.querySelector('.preview-nav.prev');
   const nextBtn = area.querySelector('.preview-nav.next');
 
-  // Se só tiver 1 arquivo, desabilita setas e esconde dots
   if(!isGaleria){
     prevBtn.disabled = true;
     nextBtn.disabled = true;
@@ -612,7 +583,6 @@ function showPreview(index){
     }
   });
 
-  // clique nas bolinhas
   area.querySelectorAll('.preview-dot').forEach(dot=>{
     dot.addEventListener('click',()=>{
       const idx = Number(dot.dataset.dot);
@@ -640,7 +610,7 @@ function renderPreviewMedia(){
   }else{
     main.innerHTML = `
       <div class="preview-media-placeholder">
-        Prévia de vídeo / mídia (exibição completa será feita na TV do velório).
+        Prévia de vídeo (exibição completa será feita na TV do quarto).
       </div>
     `;
   }
@@ -650,79 +620,51 @@ function renderPreviewMedia(){
   });
 }
 
-// ======================= ADIÇÃO DE ITENS =======================
-
-// adicionar foto simples
 document.getElementById('btnAddFoto').addEventListener('click',()=>{
   const arq = document.getElementById('fotoArquivo').files[0];
   const msg = document.getElementById('fotoMensagem').value.trim();
-
-  if(!arq){
-    alert('Selecione uma foto para adicionar.');
-    return;
-  }
-
+  if(!arq){ alert('Selecione uma foto para adicionar.'); return; }
   mural.push({
     tipo:'Foto',
     desc: msg || 'Foto adicionada ao mural.',
     arquivos:[{url:URL.createObjectURL(arq), type:arq.type}]
   });
-
   document.getElementById('fotoArquivo').value = '';
   document.getElementById('fotoMensagem').value = '';
   renderLista();
 });
 
-// adicionar galeria (até 5 fotos/vídeos)
 document.getElementById('btnAddVideo').addEventListener('click',()=>{
   const input = document.getElementById('videoArquivos');
   const files = Array.from(input.files || []);
   const msg = document.getElementById('videoMensagem').value.trim();
-
-  if(files.length === 0){
-    alert('Selecione pelo menos um arquivo para a galeria.');
-    return;
-  }
-  if(files.length > 5){
-    alert('Você pode enviar no máximo 5 arquivos por galeria.');
-    return;
-  }
-
+  if(files.length === 0){ alert('Selecione pelo menos um arquivo para a galeria.'); return; }
+  if(files.length > 5){ alert('Você pode enviar no máximo 5 arquivos por galeria.'); return; }
   const arquivos = files.map(f=>({
     url:URL.createObjectURL(f),
     type:f.type || ''
   }));
-
   const temVideo = arquivos.some(a=>a.type.startsWith('video/'));
   const tipo = temVideo ? 'Galeria (fotos / vídeos)' : 'Galeria de fotos';
-
   mural.push({
     tipo,
     desc: msg || 'Galeria adicionada ao mural.',
     arquivos
   });
-
   input.value = '';
   document.getElementById('videoMensagem').value = '';
   renderLista();
 });
 
-// adicionar texto / poema
 document.getElementById('btnAddTexto').addEventListener('click',()=>{
   const titulo = document.getElementById('textoTitulo').value.trim();
   const conteudo = document.getElementById('textoConteudo').value.trim();
-
-  if(!conteudo){
-    alert('Digite o texto ou mensagem.');
-    return;
-  }
-
+  if(!conteudo){ alert('Digite a mensagem.'); return; }
   mural.push({
-    tipo:'Texto / Poema',
+    tipo:'Mensagem',
     desc: titulo ? `${titulo}: ${conteudo}` : conteudo,
     arquivos:[]
   });
-
   document.getElementById('textoTitulo').value = '';
   document.getElementById('textoConteudo').value = '';
   renderLista();

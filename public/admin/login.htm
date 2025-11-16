@@ -7,12 +7,11 @@
 
 <style>
 :root{
-  /* TEMA ATUALIZADO (Cores Claras) */
   --bg:#f9fafb;
   --paper:#ffffff;
   --text:#1f2937;
   --muted:#6b7280;
-  --primary:#3b82f6; /* Azul amigável */
+  --primary:#3b82f6; 
   --line:#e5e7eb;
   --radius:20px;
   --shadow:0 24px 60px rgba(0,0,0,.1);
@@ -147,14 +146,14 @@ input:focus{
 
     <div class="footer-links">
       Este é um protótipo acadêmico. Qualquer usuário/senha levará ao painel.<br>
-      Voltar para o site do serviço: <a href="/index.html">Santa Casa • Mural do Bebê</a>
+      Voltar para o site do serviço: <a href="../index.html">Santa Casa • Mural do Bebê</a>
       </div>
   </div>
 </div>
 
 <script>
 document.getElementById('btnLogin').addEventListener('click',()=>{
-  // Este link relativo (sem /) está correto para esta página
+  // Este link relativo (para index.html na mesma pasta) está correto
   window.location.href = 'index.html';
 });
 </script>
